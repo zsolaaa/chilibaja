@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chilli Baja — Prémium Kézműves Chili Termékek</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="tokens.css" />
+  <style>
+    /* Hallmark · genre: editorial · macrostructure: Split Studio · theme: custom (Parázs)
+     * vibe: parázs, faszénfekete, izzó, prémium
+     * paper: oklch(13% 0.010 28) · accent: oklch(65% 0.21 38) · DM Serif Display italic + Switzer
+     * axes: dark / italic-serif / warm  ·  nav: N9-dark · footer: Ft7 */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: clip; }
+
+    body {
+      background-color: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+    }
+
+    img  { display: block; max-width: 100%; }
+    a    { color: inherit; text-decoration: none; }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* ── Scroll reveal ───────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+    }
+    .stagger.is-visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger.is-visible > *:nth-child(1) { transition-delay:   0ms; }
+    .stagger.is-visible > *:nth-child(2) { transition-delay:  70ms; }
+    .stagger.is-visible > *:nth-child(3) { transition-delay: 140ms; }
+    .stagger.is-visible > *:nth-child(4) { transition-delay: 210ms; }
+    .stagger.is-visible > *:nth-child(5) { transition-delay: 270ms; }
+    .stagger.is-visible > *:nth-child(6) { transition-delay: 330ms; }
+
+    /* ── Photo placeholder ───────────────────────────────── */
+    .photo-placeholder {
+      background-color: var(--color-paper-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-muted);
+      font-size: var(--text-xs);
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+    }
+
+    /* ── Nav N9 dark ─────────────────────────────────────── */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-sm) var(--space-xl);
+      border-bottom: 1px solid var(--color-rule);
+      position: sticky;
+      top: 0;
+      background-color: var(--color-paper);
+      z-index: 40;
+    }
+
+    .nav__wordmark {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.01em;
+      color: var(--color-ink);
+    }
+
+    .nav__links {
+      display: flex;
+      gap: var(--space-lg);
+      list-style: none;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .nav__links a {
+      color: var(--color-muted);
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .nav__links a:hover        { color: var(--color-ink); }
+    .nav__links a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    .nav__disclosure { display: none; position: relative; }
+
+    .nav__hamburger {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: var(--space-2xs);
+    }
+    .nav__hamburger::-webkit-details-marker { display: none; }
+    .nav__hamburger::marker               { display: none; }
+
+    .nav__bar {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background-color: var(--color-ink);
+    }
+
+    .nav__sheet {
+      position: absolute;
+      top: calc(100% + var(--space-xs));
+      right: 0;
+      background-color: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      padding: var(--space-md);
+      min-width: 180px;
+      z-index: 50;
+    }
+
+    .nav__sheet ul { list-style: none; display: flex; flex-direction: column; gap: var(--space-sm); }
+    .nav__sheet a {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .nav__sheet a:hover        { color: var(--color-ink); }
+    .nav__sheet a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    .nav__cart {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-accent-ink);
+      background-color: var(--color-accent);
+      padding: 0.5em 1.2em;
+      border: 1px solid var(--color-accent);
+      white-space: nowrap;
+      transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+    }
+    .nav__cart:hover        { background-color: transparent; color: var(--color-accent); }
+    .nav__cart:active       { transform: translateY(1px); }
+    .nav__cart:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    /* ── Hero: Split Studio ──────────────────────────────── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 90dvh;
+      border-bottom: 1px solid var(--color-rule);
+    }
+
+    .hero__photo {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero__photo-fill {
+      width: 100%;
+      height: 100%;
+      min-height: 480px;
+      object-fit: cover;
+    }
+
+    .hero__photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 55%, var(--color-paper) 100%);
+      pointer-events: none;
+    }
+
+    .hero__content {
+      padding: var(--space-3xl) var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--space-lg);
+    }
+
+    .hero__kicker {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      color: var(--color-accent);
+    }
+
+    .hero__headline {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-display);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .hero__sub {
+      font-size: var(--text-md);
+      color: var(--color-muted);
+      max-width: 40ch;
+      line-height: 1.6;
+    }
+
+    .hero__cta {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-accent-ink);
+      background-color: var(--color-accent);
+      padding: 0.85em 2em;
+      border: 1px solid var(--color-accent);
+      white-space: nowrap;
+      transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+    }
+    .hero__cta:hover        { background-color: transparent; color: var(--color-accent); }
+    .hero__cta:active       { transform: translateY(1px); }
+    .hero__cta:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    /* ── Heat scale ──────────────────────────────────────── */
+    .heat {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+    .heat__pip {
+      width: 7px;
+      height: 13px;
+      border-radius: 45% 45% 45% 45% / 60% 60% 40% 40%;
+      background-color: var(--color-rule);
+      transform: rotate(-15deg);
+      flex-shrink: 0;
+    }
+    .heat__pip--on { background-color: var(--color-accent); }
+
+    /* ── Products ────────────────────────────────────────── */
+    .products {
+      padding: var(--space-3xl) var(--space-xl);
+    }
+
+    .products__header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .products__title {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+    }
+
+    .products__all {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+      border-bottom: 1px solid var(--color-muted);
+      padding-bottom: 1px;
+      white-space: nowrap;
+      transition: color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
+    }
+    .products__all:hover        { color: var(--color-ink); border-color: var(--color-ink); }
+    .products__all:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    .products__grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    /* Featured card: li spans full width, article is horizontal */
+    .products__grid > li:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .product-card--featured {
+      display: flex;
+      flex-direction: row;
+      background-color: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      transition: border-color var(--dur-short) var(--ease-out);
+    }
+    .product-card--featured:hover { border-color: var(--color-accent); }
+    .product-card--featured:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    .product-card--featured .product-card__image {
+      width: 44%;
+      min-height: 340px;
+      aspect-ratio: unset;
+      flex-shrink: 0;
+      border-right: none;
+    }
+
+    .product-card--featured .product-card__body {
+      padding: var(--space-2xl) var(--space-xl);
+      justify-content: center;
+    }
+
+    .product-card--featured .product-card__name {
+      font-size: var(--text-2xl);
+      line-height: 1.1;
+    }
+
+    /* Badge for featured product */
+    .product-card__badge {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-accent-ink);
+      background-color: var(--color-accent);
+      padding: 0.2em 0.7em;
+      white-space: nowrap;
+    }
+
+    /* Standard product card */
+    .product-card {
+      background-color: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      display: flex;
+      flex-direction: column;
+      transition: border-color var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+    }
+    .product-card:hover        { border-color: var(--color-accent); transform: translateY(-2px); }
+    .product-card:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    .product-card__image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-bottom: 1px solid var(--color-rule);
+    }
+
+    .product-card__body {
+      padding: var(--space-sm) var(--space-md);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: var(--space-xs);
+    }
+
+    .product-card__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .product-card__type {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      color: var(--color-muted);
+    }
+
+    .product-card__name {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-lg);
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--color-ink);
+      line-height: 1.2;
+    }
+
+    .product-card__flavor {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .product-card__pairing {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      line-height: 1.5;
+    }
+    .product-card__pairing strong {
+      color: var(--color-ink-2);
+      font-weight: 500;
+    }
+
+    .product-card__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-sm);
+      margin-top: auto;
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .product-card__price {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-md);
+      font-weight: 400;
+      color: var(--color-accent);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .product-card__btn {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-muted);
+      border: 1px solid var(--color-rule);
+      padding: 0.5em 0.9em;
+      white-space: nowrap;
+      transition:
+        color            var(--dur-short) var(--ease-out),
+        border-color     var(--dur-short) var(--ease-out),
+        background-color var(--dur-short) var(--ease-out);
+    }
+    .product-card__btn:hover {
+      color: var(--color-accent-ink);
+      background-color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+    .product-card__btn:active       { transform: translateY(1px); }
+    .product-card__btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    /* ── Story: Split Studio ─────────────────────────────── */
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .story__photo {
+      min-height: 480px;
+    }
+
+    .story__content {
+      padding: var(--space-3xl) var(--space-2xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: var(--space-lg);
+    }
+
+    .story__label {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-accent);
+    }
+
+    .story__heading {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      line-height: 1.2;
+      max-width: 22ch;
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .story__body {
+      font-size: var(--text-base);
+      color: var(--color-muted);
+      max-width: 52ch;
+      line-height: 1.75;
+    }
+    .story__body strong { color: var(--color-ink-2); font-weight: 500; }
+
+    .story__link {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+      border-bottom: 1px solid var(--color-rule);
+      padding-bottom: 2px;
+      transition: color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
+    }
+    .story__link:hover        { color: var(--color-ink); border-color: var(--color-ink); }
+    .story__link:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    /* ── Reviews ─────────────────────────────────────────── */
+    .reviews {
+      padding: var(--space-3xl) var(--space-xl);
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .reviews__heading {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-2xl);
+    }
+
+    /* Asymmetric: featured quote (2fr) + two stacked smaller ones (1fr) */
+    .reviews__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: var(--space-md);
+      align-items: start;
+    }
+
+    .reviews__secondary {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .review-card {
+      background-color: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      padding: var(--space-lg) var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .review-card__quote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-md);
+      font-weight: 400;
+      color: var(--color-ink-2);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    /* Featured review gets a larger quote size */
+    .review-card--featured {
+      padding: var(--space-2xl) var(--space-xl);
+    }
+    .review-card--featured .review-card__quote {
+      font-size: var(--text-2xl);
+      line-height: 1.3;
+      color: var(--color-ink);
+    }
+
+    .review-card__author {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      border-top: 1px solid var(--color-rule);
+      padding-top: var(--space-sm);
+    }
+
+    /* ── Locations ───────────────────────────────────────── */
+    .locations {
+      padding: var(--space-3xl) var(--space-xl);
+      border-top: 1px solid var(--color-rule);
+    }
+
+    .locations__heading {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-2xl);
+    }
+
+    .locations__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+
+    .location-card {
+      background-color: var(--color-paper-2);
+      border: 1px solid var(--color-rule);
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    .location-card__tag {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      color: var(--color-accent);
+      border: 1px solid var(--color-accent);
+      padding: 0.2em 0.6em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .location-card__name {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-xl);
+      font-weight: 400;
+      color: var(--color-ink);
+      margin-bottom: var(--space-xs);
+      line-height: 1.2;
+    }
+
+    .location-card__detail {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      line-height: 1.6;
+      margin-bottom: var(--space-2xs);
+    }
+    .location-card__detail strong { color: var(--color-ink-2); font-weight: 500; }
+
+    /* ── Footer: Ft7 Newsletter-first ───────────────────── */
+    .footer {
+      border-top: 1px solid var(--color-rule);
+      background-color: var(--color-paper-2);
+    }
+
+    .footer__newsletter {
+      padding: var(--space-2xl) var(--space-xl);
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-xl);
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--color-rule);
+    }
+
+    .footer__nl-heading {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-xl);
+      font-weight: 400;
+      color: var(--color-ink);
+      margin-bottom: var(--space-xs);
+    }
+
+    .footer__nl-sub {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      max-width: 40ch;
+    }
+
+    .footer__form {
+      display: flex;
+      flex-shrink: 0;
+    }
+
+    .footer__email {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-ink);
+      background-color: var(--color-paper);
+      border: 1px solid var(--color-rule);
+      border-right: none;
+      padding: 0.7em 1em;
+      min-width: 220px;
+      outline: none;
+    }
+    .footer__email::placeholder { color: var(--color-muted); }
+    .footer__email:focus { border-color: var(--color-focus); }
+
+    .footer__subscribe {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-accent-ink);
+      background-color: var(--color-accent);
+      border: 1px solid var(--color-accent);
+      padding: 0.7em 1.2em;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+    }
+    .footer__subscribe:hover        { background-color: transparent; color: var(--color-accent); }
+    .footer__subscribe:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    .footer__bottom {
+      padding: var(--space-lg) var(--space-xl);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+    }
+
+    .footer__wordmark {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-md);
+      font-weight: 400;
+      color: var(--color-ink);
+    }
+
+    .footer__links-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xs);
+    }
+    .footer__links-group a {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-muted);
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .footer__links-group a:hover        { color: var(--color-ink); }
+    .footer__links-group a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    .footer__copy {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      align-self: flex-end;
+    }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav { padding: var(--space-sm) var(--space-md); }
+      .nav__links     { display: none; }
+      .nav__disclosure { display: block; }
+
+      .hero { grid-template-columns: 1fr; min-height: unset; }
+      .hero__photo::after { display: none; }
+      .hero__photo-fill { min-height: 55dvh; }
+      .hero__content { padding: var(--space-xl) var(--space-md); }
+
+      .products { padding: var(--space-2xl) var(--space-md); }
+      .products__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-sm); }
+
+      .product-card--featured {
+        grid-column: 1 / -1;
+        flex-direction: column;
+      }
+      .product-card--featured .product-card__image {
+        width: 100%;
+        min-height: unset;
+        aspect-ratio: 16 / 9;
+        border-bottom: 1px solid var(--color-rule);
+      }
+      .product-card--featured .product-card__body {
+        padding: var(--space-sm) var(--space-md);
+      }
+      .product-card--featured .product-card__name {
+        font-size: var(--text-lg);
+      }
+
+      .story { grid-template-columns: 1fr; }
+      .story__photo   { min-height: 50dvh; }
+      .story__content { padding: var(--space-2xl) var(--space-md); }
+
+      .reviews { padding: var(--space-2xl) var(--space-md); }
+      .reviews__grid { grid-template-columns: 1fr; }
+
+      .locations { padding: var(--space-2xl) var(--space-md); }
+      .locations__grid { grid-template-columns: 1fr; }
+
+      .footer__newsletter { padding: var(--space-xl) var(--space-md); flex-direction: column; align-items: flex-start; }
+      .footer__form  { width: 100%; }
+      .footer__email { flex: 1; min-width: 0; }
+      .footer__bottom { padding: var(--space-lg) var(--space-md); }
+    }
+
+    @media (max-width: 414px) {
+      .products__grid { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0ms !important; }
+      .product-card:hover { transform: none; }
+      .reveal, .stagger > * {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav: N9 dark, with mobile disclosure -->
+  <nav class="nav" aria-label="Főnavigáció">
+    <a href="index.html" class="nav__wordmark">Chilli Baja</a>
+
+    <ul class="nav__links" role="list">
+      <li><a href="/termekek/">Termékek</a></li>
+      <li><a href="rolunk.html">Rólunk</a></li>
+      <li><a href="/szallitas/">Szállítás</a></li>
+      <li><a href="kapcsolat.html">Kapcsolat</a></li>
+    </ul>
+
+    <details class="nav__disclosure">
+      <summary class="nav__hamburger" aria-label="Navigáció megnyitása">
+        <span class="nav__bar"></span>
+        <span class="nav__bar"></span>
+        <span class="nav__bar"></span>
+      </summary>
+      <nav class="nav__sheet" aria-label="Mobil navigáció">
+        <ul role="list">
+          <li><a href="/termekek/">Termékek</a></li>
+          <li><a href="rolunk.html">Rólunk</a></li>
+          <li><a href="/szallitas/">Szállítás</a></li>
+          <li><a href="kapcsolat.html">Kapcsolat</a></li>
+        </ul>
+      </nav>
+    </details>
+
+    <a href="/kosar/" class="nav__cart" aria-label="Kosár megtekintése">Kosár</a>
+  </nav>
+
+  <!-- Hero: Split Studio -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="hero__photo">
+      <!--
+        CSERÉLD LE: saját termékfotóra (üvegek + friss chilipaprikák, minimum 1400×1800px)
+        <img class="hero__photo-fill" src="kepek/hero.jpg"
+             alt="Chilli Baja kézműves chili szószok és fűszerek friss paprikákkal körülvéve"
+             fetchpriority="high" />
+      -->
+      <div class="photo-placeholder hero__photo-fill"
+           role="img" aria-label="Hero termékfotó helye">Termékfotó</div>
+    </div>
+
+    <div class="hero__content">
+      <p class="hero__kicker">6500 Baja &#183; Kézzel készítve</p>
+      <h1 class="hero__headline" id="hero-heading">
+        Kézzel.<br>Farmról.<br>Izzón.
+      </h1>
+      <p class="hero__sub">
+        100% természetes chili szószok, fűszerek és krémek.
+        Közvetlenül a bajaihoz kötött farmról, generációs tudással.
+      </p>
+      <a href="/termekek/" class="hero__cta">Vásárlás &#8594;</a>
+    </div>
+  </section>
+
+  <!-- Products: featured + subordinate grid -->
+  <section class="products" aria-labelledby="products-heading">
+    <div class="products__header reveal">
+      <h2 class="products__title" id="products-heading">Termékeink</h2>
+      <a href="/termekek/" class="products__all">Összes termék &#8594;</a>
+    </div>
+
+    <!--
+      CSERÉLD LE: valódi termékadatokkal (név, ízleírás, mihez ajánljuk, csípősség, ár, link).
+      A csípősség-skálán az --on osztályú pipák száma = a termék csípőssége (1–5).
+      Az első termék kiemelt (featured) kártya, teljes szélességben.
+    -->
+    <ul class="products__grid stagger" role="list">
+
+      <!-- Kiemelt termék: teljes szélesség, horizontális layout -->
+      <li>
+        <article class="product-card--featured">
+          <!--
+            CSERÉLD LE: a legjobb eladó termék fotójára (min 900×600px)
+            <img class="photo-placeholder product-card__image" src="kepek/termek-1.jpg"
+                 alt="Chilli Baja legjobb eladó szósz" />
+          -->
+          <div class="photo-placeholder product-card__image"
+               role="img" aria-label="Kiemelt termékfotó helye">Fotó</div>
+          <div class="product-card__body">
+            <div class="product-card__top">
+              <span class="product-card__type">Szósz</span>
+              <span class="product-card__badge">Legjobb eladó</span>
+              <div class="heat" role="img" aria-label="Csípősség: 3/5">
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip"></span>
+                <span class="heat__pip"></span>
+              </div>
+            </div>
+            <h3 class="product-card__name">Termék neve</h3>
+            <p class="product-card__flavor">Ízleírás helye, pl. füstös, mélyen aromás, enyhén édes utóízzel.</p>
+            <p class="product-card__pairing"><strong>Mihez ajánljuk:</strong> grill húsok, steakek, pácok</p>
+            <div class="product-card__bottom">
+              <span class="product-card__price">999 Ft</span>
+              <a href="/termekek/termek-neve/" class="product-card__btn">Megnézem &#8594;</a>
+            </div>
+          </div>
+        </article>
+      </li>
+
+      <li>
+        <article class="product-card">
+          <div class="photo-placeholder product-card__image" role="img" aria-label="Termékfotó">Fotó</div>
+          <div class="product-card__body">
+            <div class="product-card__top">
+              <span class="product-card__type">Fűszer</span>
+              <div class="heat" role="img" aria-label="Csípősség: 2/5">
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip"></span>
+                <span class="heat__pip"></span>
+                <span class="heat__pip"></span>
+              </div>
+            </div>
+            <h3 class="product-card__name">Termék neve</h3>
+            <p class="product-card__flavor">Ízleírás helye, pl. aromás fűszerkeverék, enyhén csípős, mindennapos.</p>
+            <p class="product-card__pairing"><strong>Mihez ajánljuk:</strong> sültek, levesek, rántott ételek</p>
+            <div class="product-card__bottom">
+              <span class="product-card__price">999 Ft</span>
+              <a href="/termekek/termek-neve/" class="product-card__btn">Megnézem</a>
+            </div>
+          </div>
+        </article>
+      </li>
+
+      <li>
+        <article class="product-card">
+          <div class="photo-placeholder product-card__image" role="img" aria-label="Termékfotó">Fotó</div>
+          <div class="product-card__body">
+            <div class="product-card__top">
+              <span class="product-card__type">Krém</span>
+              <div class="heat" role="img" aria-label="Csípősség: 4/5">
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip"></span>
+              </div>
+            </div>
+            <h3 class="product-card__name">Termék neve</h3>
+            <p class="product-card__flavor">Ízleírás helye, pl. intenzív, gazdag krém, karakteres csípősséggel.</p>
+            <p class="product-card__pairing"><strong>Mihez ajánljuk:</strong> mártogatós, pizza, szendvicsek</p>
+            <div class="product-card__bottom">
+              <span class="product-card__price">999 Ft</span>
+              <a href="/termekek/termek-neve/" class="product-card__btn">Megnézem</a>
+            </div>
+          </div>
+        </article>
+      </li>
+
+      <li>
+        <article class="product-card">
+          <div class="photo-placeholder product-card__image" role="img" aria-label="Termékfotó">Fotó</div>
+          <div class="product-card__body">
+            <div class="product-card__top">
+              <span class="product-card__type">Szósz</span>
+              <div class="heat" role="img" aria-label="Csípősség: 5/5">
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip heat__pip--on"></span>
+              </div>
+            </div>
+            <h3 class="product-card__name">Termék neve</h3>
+            <p class="product-card__flavor">Ízleírás helye, pl. csak az igazi ínyenceknek: extrém csípős.</p>
+            <p class="product-card__pairing"><strong>Mihez ajánljuk:</strong> kísérletező konyháknak, bátor fogásokhoz</p>
+            <div class="product-card__bottom">
+              <span class="product-card__price">999 Ft</span>
+              <a href="/termekek/termek-neve/" class="product-card__btn">Megnézem</a>
+            </div>
+          </div>
+        </article>
+      </li>
+
+      <li>
+        <article class="product-card">
+          <div class="photo-placeholder product-card__image" role="img" aria-label="Termékfotó">Fotó</div>
+          <div class="product-card__body">
+            <div class="product-card__top">
+              <span class="product-card__type">Fűszerkeverék</span>
+              <div class="heat" role="img" aria-label="Csípősség: 1/5">
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip"></span>
+                <span class="heat__pip"></span>
+                <span class="heat__pip"></span>
+                <span class="heat__pip"></span>
+              </div>
+            </div>
+            <h3 class="product-card__name">Termék neve</h3>
+            <p class="product-card__flavor">Ízleírás helye, pl. enyhe, illatosan fűszeres, minden napra való.</p>
+            <p class="product-card__pairing"><strong>Mihez ajánljuk:</strong> zöldségek, tojásos ételek, saláták</p>
+            <div class="product-card__bottom">
+              <span class="product-card__price">999 Ft</span>
+              <a href="/termekek/termek-neve/" class="product-card__btn">Megnézem</a>
+            </div>
+          </div>
+        </article>
+      </li>
+
+      <li>
+        <article class="product-card">
+          <div class="photo-placeholder product-card__image" role="img" aria-label="Termékfotó">Fotó</div>
+          <div class="product-card__body">
+            <div class="product-card__top">
+              <span class="product-card__type">Krém</span>
+              <div class="heat" role="img" aria-label="Csípősség: 2/5">
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip"></span>
+                <span class="heat__pip"></span>
+                <span class="heat__pip"></span>
+              </div>
+            </div>
+            <h3 class="product-card__name">Termék neve</h3>
+            <p class="product-card__flavor">Ízleírás helye, pl. selymes, enyhén csípős, gazdag állagú.</p>
+            <p class="product-card__pairing"><strong>Mihez ajánljuk:</strong> ropogtatnivalók, bundás ételek, reggeli</p>
+            <div class="product-card__bottom">
+              <span class="product-card__price">999 Ft</span>
+              <a href="/termekek/termek-neve/" class="product-card__btn">Megnézem</a>
+            </div>
+          </div>
+        </article>
+      </li>
+
+    </ul>
+  </section>
+
+  <!-- Story: Split Studio (photo left, text right) -->
+  <section class="story" aria-labelledby="story-heading">
+    <!--
+      CSERÉLD LE: farm, hozzávalók vagy a készítő fotójára
+      <img class="story__photo" src="kepek/farm.jpg" alt="A Chilli Baja farmja és a készítők" />
+    -->
+    <div class="photo-placeholder story__photo"
+         role="img" aria-label="Farmfotó helye">Farmfotó</div>
+
+    <div class="story__content reveal">
+      <span class="story__label">A mi történetünk</span>
+      <h2 class="story__heading" id="story-heading">
+        Negyvenfajta paprika, mind a saját földünkön.
+      </h2>
+      <p class="story__body">
+        Augusztus végén kézzel szedve, napokig szárítva a déli napon.
+        Tartósítószer nincs, aromaanyag nincs: csak a paprika, a tűz és az idő.
+        <strong>A bajaihoz kötött termőföld íze kerül minden üvegbe.</strong>
+      </p>
+      <p class="story__body">
+        Minden termékünk <strong>HACCP-tanúsított, 100% természetes, adalékanyag-mentes.</strong>
+        Közvetlenül a farmunkról, ahogy lennie kell.
+      </p>
+      <a href="rolunk.html" class="story__link">Rólunk bővebben &#8594;</a>
+    </div>
+  </section>
+
+  <!-- Reviews: asymmetric layout -->
+  <section class="reviews" aria-labelledby="reviews-heading">
+    <h2 class="reviews__heading reveal" id="reviews-heading">Mit mondanak rólunk?</h2>
+    <!--
+      CSERÉLD LE: valódi vásárlói véleményekkel.
+      Az első (featured) vélemény a legerősebb, legrövidebb idézet legyen.
+    -->
+    <div class="reviews__grid">
+      <article class="review-card review-card--featured reveal">
+        <p class="review-card__quote">&#8220;Vásárlói vélemény helye. Töltsd ki valódi visszajelzéssel.&#8221;</p>
+        <p class="review-card__author">Vásárló neve &#183; Helyszín</p>
+      </article>
+      <div class="reviews__secondary stagger">
+        <article class="review-card">
+          <p class="review-card__quote">&#8220;Vásárlói vélemény helye. Töltsd ki valódi visszajelzéssel.&#8221;</p>
+          <p class="review-card__author">Vásárló neve &#183; Helyszín</p>
+        </article>
+        <article class="review-card">
+          <p class="review-card__quote">&#8220;Vásárlói vélemény helye. Töltsd ki valódi visszajelzéssel.&#8221;</p>
+          <p class="review-card__author">Vásárló neve &#183; Helyszín</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locations -->
+  <section class="locations" aria-labelledby="locations-heading">
+    <h2 class="locations__heading reveal" id="locations-heading">Hol találkozhatsz velünk?</h2>
+    <div class="locations__grid stagger">
+      <div class="location-card">
+        <span class="location-card__tag">Rendszeres</span>
+        <h3 class="location-card__name">Bajai Városi Piac</h3>
+        <p class="location-card__detail"><strong>Asztal:</strong> E07</p>
+        <p class="location-card__detail"><strong>Nyitvatartás:</strong> Szerda és szombat</p>
+      </div>
+      <div class="location-card">
+        <span class="location-card__tag">Szezonális</span>
+        <h3 class="location-card__name">Profil Bt Faház</h3>
+        <p class="location-card__detail"><strong>Cím:</strong> Keleti körút és Nagy István utca sarka</p>
+        <p class="location-card__detail">Friss palánták, gyümölcsök és egyedi chili termékek.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer: Ft7 Newsletter-first -->
+  <footer class="footer">
+    <div class="footer__newsletter">
+      <div>
+        <h2 class="footer__nl-heading">Az izzón friss hírek.</h2>
+        <p class="footer__nl-sub">Új ízek, szezonális termékek, piac helyszínek. Spam nélkül.</p>
+      </div>
+      <form class="footer__form" action="#" method="post" aria-label="Hírlevél feliratkozás">
+        <label for="footer-email" class="sr-only">E-mail cím</label>
+        <input
+          type="email"
+          id="footer-email"
+          name="email"
+          class="footer__email"
+          placeholder="neved@email.com"
+          autocomplete="email"
+          required
+        />
+        <button type="submit" class="footer__subscribe">Feliratkozás</button>
+      </form>
+    </div>
+
+    <div class="footer__bottom">
+      <a href="index.html" class="footer__wordmark">Chilli Baja</a>
+      <div class="footer__links-group">
+        <a href="/termekek/">Termékek</a>
+        <a href="rolunk.html">Rólunk</a>
+        <a href="/szallitas/">Szállítás</a>
+      </div>
+      <div class="footer__links-group">
+        <a href="kapcsolat.html">Kapcsolat</a>
+        <a href="/adatvedelem/">Adatvédelem</a>
+        <a href="/aszf/">ÁSZF</a>
+      </div>
+      <p class="footer__copy">&#169; 2026 Chilli Baja</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add('is-visible');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -60px 0px' }
+      );
+      document.querySelectorAll('.reveal, .stagger').forEach(function (el) {
+        io.observe(el);
+      });
+    })();
+  </script>
+
+</body>
+</html>

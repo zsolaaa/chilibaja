@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rólunk — Chilli Baja</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="tokens.css" />
+  <style>
+    /* Hallmark · genre: editorial · macrostructure: Long Document · theme: Brutal
+     * nav: N6-brutal · footer: Ft4 · enrichment: none · tone: brutalist */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { overflow-x: clip; }
+
+    body {
+      background-color: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* ── Nav ─────────────────────────────────────────────── */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-sm) var(--space-xl);
+      border-bottom: 3px solid var(--color-ink);
+    }
+    .nav__wordmark {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+    }
+    .nav__links {
+      display: flex;
+      gap: var(--space-lg);
+      list-style: none;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+    }
+    .nav__links a {
+      color: var(--color-muted);
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .nav__links a[aria-current="page"] { color: var(--color-ink); }
+    .nav__links a:hover               { color: var(--color-ink); }
+    .nav__links a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+    .nav__cart {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-accent-ink);
+      background-color: var(--color-accent);
+      padding: 0.5em 1.2em;
+      border: 2px solid var(--color-accent);
+      white-space: nowrap;
+      transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+    }
+    .nav__cart:hover        { background-color: var(--color-paper); color: var(--color-accent); }
+    .nav__cart:active       { transform: translateY(1px); }
+    .nav__cart:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    /* ── Page header ─────────────────────────────────────── */
+    .page-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-bottom: 3px solid var(--color-ink);
+    }
+
+    .page-header__left {
+      padding: var(--space-2xl) var(--space-xl);
+      border-right: 3px solid var(--color-ink);
+    }
+
+    .page-header__title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw + 1rem, 6rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 1.04;
+      color: var(--color-ink);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .page-header__right {
+      padding: var(--space-2xl) var(--space-xl);
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .page-header__lead {
+      font-size: var(--text-md);
+      color: var(--color-ink);
+      line-height: 1.6;
+      max-width: 55ch;
+    }
+
+    .page-header__lead strong {
+      font-weight: 500;
+    }
+
+    /* ── Body sections ───────────────────────────────────── */
+    .about-body {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Section row: label left + content right */
+    .about-row {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 0;
+      border-bottom: 2px solid var(--color-rule);
+      padding: var(--space-2xl) var(--space-xl);
+    }
+
+    .about-row__label {
+      font-family: var(--font-display);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-muted);
+      padding-right: var(--space-xl);
+      padding-top: 0.2em;
+    }
+
+    .about-row__label span {
+      display: block;
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      color: var(--color-ink);
+      line-height: 1.0;
+      margin-bottom: var(--space-xs);
+    }
+
+    .about-row__content {
+      max-width: 65ch;
+    }
+
+    .about-row__heading {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-sm);
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .about-row__body {
+      font-size: var(--text-base);
+      color: var(--color-muted);
+      line-height: 1.7;
+    }
+
+    .about-row__body strong {
+      color: var(--color-ink);
+      font-weight: 500;
+    }
+
+    /* ── Notice callout ──────────────────────────────────── */
+    .notice {
+      border: 2px solid var(--color-ink);
+      padding: var(--space-lg) var(--space-xl);
+      background-color: var(--color-paper-2);
+      margin-top: var(--space-lg);
+    }
+
+    .notice__heading {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-ink);
+      margin-bottom: var(--space-sm);
+    }
+
+    .notice__body {
+      font-size: var(--text-base);
+      color: var(--color-muted);
+      line-height: 1.7;
+    }
+
+    .notice__body strong {
+      color: var(--color-ink);
+      font-weight: 500;
+    }
+
+    /* ── CTA strip ───────────────────────────────────────── */
+    .cta-strip {
+      border-top: 3px solid var(--color-ink);
+      border-bottom: 3px solid var(--color-ink);
+      padding: var(--space-2xl) var(--space-xl);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-xl);
+      flex-wrap: wrap;
+    }
+
+    .cta-strip__text {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+      line-height: 1.1;
+      max-width: 40ch;
+      overflow-wrap: anywhere;
+      min-width: 0;
+    }
+
+    .cta-strip__text span {
+      color: var(--color-accent);
+    }
+
+    .cta-strip__btn {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--color-accent-ink);
+      background-color: var(--color-accent);
+      padding: 0.75em 1.8em;
+      border: 2px solid var(--color-accent);
+      white-space: nowrap;
+      transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+    }
+    .cta-strip__btn:hover        { background-color: var(--color-paper); color: var(--color-accent); }
+    .cta-strip__btn:active       { transform: translateY(1px); }
+    .cta-strip__btn:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    .footer {
+      border-top: 1px solid var(--color-rule);
+      padding: var(--space-lg) var(--space-xl);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+    }
+    .footer__wordmark {
+      font-family: var(--font-display);
+      font-size: var(--text-md);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--color-ink);
+    }
+    .footer__links-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2xs);
+    }
+    .footer__links-group a {
+      font-size: var(--text-sm);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-muted);
+      transition: color var(--dur-short) var(--ease-out);
+    }
+    .footer__links-group a:hover        { color: var(--color-ink); }
+    .footer__links-group a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
+    .footer__copy {
+      font-size: var(--text-sm);
+      color: var(--color-muted);
+      align-self: flex-end;
+    }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav { padding: var(--space-sm) var(--space-md); }
+      .nav__links { display: none; }
+
+      .page-header { grid-template-columns: 1fr; }
+      .page-header__left  { border-right: none; border-bottom: 3px solid var(--color-ink); padding: var(--space-xl) var(--space-md); }
+      .page-header__right { padding: var(--space-xl) var(--space-md); }
+
+      .about-row {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+        padding: var(--space-xl) var(--space-md);
+      }
+      .about-row__label { padding-right: 0; }
+      .about-row__label span { font-size: var(--text-xl); }
+
+      .notice { padding: var(--space-md); }
+
+      .cta-strip {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--space-xl) var(--space-md);
+      }
+
+      .footer { padding: var(--space-lg) var(--space-md); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav" aria-label="Főnavigáció">
+    <a href="index.html" class="nav__wordmark">Chilli Baja</a>
+    <ul class="nav__links" role="list">
+      <li><a href="/termekek/">Termékek</a></li>
+      <li><a href="rolunk.html" aria-current="page">Rólunk</a></li>
+      <li><a href="/szallitas/">Szállítás</a></li>
+      <li><a href="kapcsolat.html">Kapcsolat</a></li>
+    </ul>
+    <a href="/kosar/" class="nav__cart" aria-label="Kosár megtekintése">Kosár</a>
+  </nav>
+
+  <!-- Page header: split layout -->
+  <header class="page-header">
+    <div class="page-header__left">
+      <h1 class="page-header__title">Rólunk<span style="color:var(--color-accent)">.</span></h1>
+    </div>
+    <div class="page-header__right">
+      <p class="page-header__lead">
+        A hagyomány és az innováció nálunk kéz a kézben jár.
+        <strong>Szüleink örökölt tudása és tapasztalata inspirál minket,</strong>
+        hogy folyamatosan fejlesszük termékeinket és megőrizzük a természetes,
+        kézműves értékeket.
+      </p>
+    </div>
+  </header>
+
+  <!-- Body: long document sections -->
+  <main class="about-body">
+
+    <!-- Generációs örökség -->
+    <section class="about-row" aria-labelledby="heritage-heading">
+      <div class="about-row__label" aria-hidden="true">
+        <span>01</span>
+        Örökség
+      </div>
+      <div class="about-row__content">
+        <h2 class="about-row__heading" id="heritage-heading">Generációk tapasztalata</h2>
+        <p class="about-row__body">
+          Értékes tanácsaik és támogatásuk segít nekünk a fejlődésben és gyarapodásban,
+          így <strong>minden egyes új chili termék mögött generációk tapasztalata
+          és szenvedélye áll.</strong>
+        </p>
+      </div>
+    </section>
+
+    <!-- Bővülő kínálat -->
+    <section class="about-row" aria-labelledby="lineup-heading">
+      <div class="about-row__label" aria-hidden="true">
+        <span>02</span>
+        Fejlesztés
+      </div>
+      <div class="about-row__content">
+        <h2 class="about-row__heading" id="lineup-heading">Folyamatosan bővülő kínálat</h2>
+        <p class="about-row__body">
+          Nálunk nincs megállás: lépésről lépésre haladunk előre, hogy egyre izgalmasabb
+          <strong>chili szószokat, fűszereket és egyedi ízkombinációkat</strong>
+          kínáljunk webshopunkban. Új ízek és különleges termékek folyamatosan érkeznek.
+        </p>
+      </div>
+    </section>
+
+    <!-- Közösség és visszajelzés -->
+    <section class="about-row" aria-labelledby="community-heading">
+      <div class="about-row__label" aria-hidden="true">
+        <span>03</span>
+        Közösség
+      </div>
+      <div class="about-row__content">
+        <h2 class="about-row__heading" id="community-heading">Látogass el vagy böngéssz online</h2>
+        <p class="about-row__body">
+          Örömmel fogadjuk <strong>ötleteidet és javaslataidat,</strong> hiszen
+          számunkra a vevőink visszajelzései ugyanolyan fontosak, mint a gondosan
+          megválogatott alapanyagok. Személyesen a Bajai Városi Piacon, online
+          a webshopunkban találsz minket.
+        </p>
+      </div>
+    </section>
+
+    <!-- Fontos tudnivaló -->
+    <section class="about-row" aria-labelledby="notice-heading" style="border-bottom: 3px solid var(--color-ink);">
+      <div class="about-row__label" aria-hidden="true">
+        <span>04</span>
+        Tudnivaló
+      </div>
+      <div class="about-row__content">
+        <h2 class="about-row__heading" id="notice-heading">Csomagolásról és minőségről</h2>
+        <p class="about-row__body">
+          Mivel folyamatosan kísérletezünk és fejlesztünk, előfordulhat, hogy
+          termékeink csomagolása, üvege vagy címkéje eltér a webshopban látottaktól.
+        </p>
+        <div class="notice" role="note" aria-label="Fontos">
+          <p class="notice__heading">A minőség mindig változatlan</p>
+          <p class="notice__body">
+            <strong>Prémium, kézműves chili termékek, közvetlenül a gazdaságból.</strong>
+            Akármilyen csomagolásban érkezik, a tartalom ugyanaz marad: 100% természetes,
+            adalékanyag-mentes, gondosan készített.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CTA strip -->
+  <section class="cta-strip" aria-label="Webshop felhívás">
+    <p class="cta-strip__text">
+      Fedezd fel <span>csípős</span> újdonságainkat.
+    </p>
+    <a href="/termekek/" class="cta-strip__btn">Webshop megtekintése &#8594;</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a href="index.html" class="footer__wordmark">Chilli Baja</a>
+    <div class="footer__links-group">
+      <a href="/termekek/">Termékek</a>
+      <a href="rolunk.html">Rólunk</a>
+      <a href="/szallitas/">Szállítás</a>
+    </div>
+    <div class="footer__links-group">
+      <a href="kapcsolat.html">Kapcsolat</a>
+      <a href="/adatvedelem/">Adatvédelem</a>
+      <a href="/aszf/">ÁSZF</a>
+    </div>
+    <p class="footer__copy">&#169; 2026 Chilli Baja</p>
+  </footer>
+
+</body>
+</html>
