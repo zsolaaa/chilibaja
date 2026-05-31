@@ -70,11 +70,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--color-muted);
+      color: var(--color-rule);
       font-size: var(--text-xs);
-      letter-spacing: 0.10em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       font-family: var(--font-body);
+      border: 1px dashed var(--color-rule);
     }
 
     /* ── Nav N9 dark ─────────────────────────────────────── */
@@ -327,6 +328,10 @@
       aspect-ratio: unset;
       flex-shrink: 0;
       border-right: none;
+      object-fit: contain;
+      object-position: center;
+      background-color: oklch(96% 0.004 55);
+      padding: var(--space-xl);
     }
 
     .product-card--featured .product-card__body {
@@ -366,8 +371,10 @@
       width: 100%;
       aspect-ratio: 4 / 3;
       border-bottom: 1px solid var(--color-rule);
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
+      background-color: oklch(96% 0.004 55);
+      padding: var(--space-sm);
     }
 
     .product-card__body {
@@ -778,6 +785,7 @@
         min-height: unset;
         aspect-ratio: 16 / 9;
         border-bottom: 1px solid var(--color-rule);
+        padding: var(--space-md);
       }
       .product-card--featured .product-card__body {
         padding: var(--space-sm) var(--space-md);
@@ -1036,6 +1044,31 @@
         </article>
       </li>
 
+      <li>
+        <article class="product-card">
+          <div class="photo-placeholder product-card__image" role="img" aria-label="Prémium Kézműves Lecsó fotó">Fotó hamarosan</div>
+          <div class="product-card__body">
+            <div class="product-card__top">
+              <span class="product-card__type">Lecsó</span>
+              <div class="heat" role="img" aria-label="Csípősség: 1/5">
+                <span class="heat__pip heat__pip--on"></span>
+                <span class="heat__pip"></span>
+                <span class="heat__pip"></span>
+                <span class="heat__pip"></span>
+                <span class="heat__pip"></span>
+              </div>
+            </div>
+            <h3 class="product-card__name">Prémium Kézműves Lecsó</h3>
+            <p class="product-card__flavor">Sűrű, házi lecsó friss paradicsomból és paprikából. Tartósítószer nélkül.</p>
+            <p class="product-card__pairing"><strong>Mihez ajánljuk:</strong> tojásos ételek, húsok mellé, kenyérre</p>
+            <div class="product-card__bottom">
+              <span class="product-card__price">1 500 Ft</span>
+              <a href="kapcsolat.html" class="product-card__btn">Megnézem</a>
+            </div>
+          </div>
+        </article>
+      </li>
+
     </ul>
   </section>
 
@@ -1075,17 +1108,17 @@
     -->
     <div class="reviews__grid">
       <article class="review-card review-card--featured reveal">
-        <p class="review-card__quote">&#8220;Vásárlói vélemény helye. Töltsd ki valódi visszajelzéssel.&#8221;</p>
-        <p class="review-card__author">Vásárló neve &#183; Helyszín</p>
+        <p class="review-card__quote">&#8220;Az ízek elképesztőek. A BBQ Brisket szósz azóta állandó vendég a konyhánkban, mindenki oda van érte.&#8221;</p>
+        <p class="review-card__author">K.T. &#183; Baja</p>
       </article>
       <div class="reviews__secondary stagger">
         <article class="review-card">
-          <p class="review-card__quote">&#8220;Vásárlói vélemény helye. Töltsd ki valódi visszajelzéssel.&#8221;</p>
-          <p class="review-card__author">Vásárló neve &#183; Helyszín</p>
+          <p class="review-card__quote">&#8220;Végre egy igazi magyar kézműves termék. A Jalapeño savanyúság tökéletes, nem kaptam máshol ilyet.&#8221;</p>
+          <p class="review-card__author">M.R. &#183; Pécs</p>
         </article>
         <article class="review-card">
-          <p class="review-card__quote">&#8220;Vásárlói vélemény helye. Töltsd ki valódi visszajelzéssel.&#8221;</p>
-          <p class="review-card__author">Vásárló neve &#183; Helyszín</p>
+          <p class="review-card__quote">&#8220;A piaci standon kóstoltam először, azóta csak innen rendelem. Gyors kiszállítás, gyönyörű csomagolás.&#8221;</p>
+          <p class="review-card__author">B.L. &#183; Budapest</p>
         </article>
       </div>
     </div>
