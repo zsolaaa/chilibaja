@@ -178,18 +178,21 @@
     .hero {
       display: grid;
       grid-template-columns: 1fr 1fr;
+      height: calc(100dvh - 4.5rem);
       border-bottom: 1px solid var(--color-rule);
     }
 
     .hero__photo {
       position: relative;
       background-color: var(--color-paper);
+      overflow: hidden;
     }
 
     .hero__photo-fill {
       width: 100%;
-      height: auto;
-      display: block;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
     }
 
     .hero__photo::after {
