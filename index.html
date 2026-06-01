@@ -809,9 +809,10 @@
       .nav__links     { display: none; }
       .nav__disclosure { display: block; }
 
-      .hero { grid-template-columns: 1fr; min-height: unset; }
+      .hero { grid-template-columns: 1fr; min-height: unset; height: auto !important; }
+      .hero__photo { aspect-ratio: 4 / 3; -webkit-mask-image: none; mask-image: none; }
       .hero__photo::after { display: none; }
-      .hero__photo-fill { min-height: 55dvh; }
+      .hero__photo-fill { height: 100%; min-height: unset; object-fit: contain; object-position: center center; }
       .hero__content { padding: var(--space-xl) var(--space-md); }
 
       .products { padding: var(--space-2xl) var(--space-md); }
